@@ -1,0 +1,6 @@
+langchain
+langgraph
+openai
+tiktoken
+google-api-python-client
+python-dotenv
