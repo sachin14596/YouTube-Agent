@@ -1,0 +1,72 @@
+1
+00:00:00,000 --> 00:00:07,520
+Hi, and welcome to Veritasium, an online science video blog.
+
+2
+00:00:07,520 --> 00:00:13,720
+I'd like to take on scientific topics all the way from the simplest to the most complex.
+
+3
+00:00:13,720 --> 00:00:19,920
+So a good place to start, I think, is with a problem considered by a famous physicist
+
+4
+00:00:19,920 --> 00:00:21,840
+Richard Feynman.
+
+5
+00:00:21,840 --> 00:00:29,000
+He asked if all the world's scientific information, except for one sentence, were destroyed in
+
+6
+00:00:29,000 --> 00:00:36,480
+some cataclysmic event, which single statement would contain the most scientific information
+
+7
+00:00:36,480 --> 00:00:39,120
+for future generations.
+
+8
+00:00:39,120 --> 00:00:46,280
+His conclusion was that it is the atomic hypothesis.
+
+9
+00:00:46,280 --> 00:00:51,520
+The atomic hypothesis states that all things are made up of atoms.
+
+10
+00:00:51,520 --> 00:00:57,160
+Tiny particles that are in perpetual motion, they attract each other when a little distance
+
+11
+00:00:57,160 --> 00:01:01,840
+apart, but repel if squeezed together.
+
+12
+00:01:01,840 --> 00:01:06,240
+That statement is incredibly important to understand if you want to understand most of
+
+13
+00:01:06,240 --> 00:01:12,440
+the rest of science, because everything is made of atoms, including you and me, and
+
+14
+00:01:12,440 --> 00:01:16,760
+the opera house, and the harbor bridge, and the water, and the trees, and the grass,
+
+15
+00:01:16,760 --> 00:01:21,280
+and the air, and the clouds, and, well, you get the idea.
+
+16
+00:01:21,280 --> 00:01:25,520
+Everything is made out of atoms, so it's really important to understand the atomic concept
+
+17
+00:01:25,560 --> 00:01:28,560
+if you're going to understand the rest of science.
+
+18
+00:01:28,560 --> 00:01:29,960
+The idea that...
+

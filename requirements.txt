@@ -4,3 +4,5 @@ openai
 tiktoken
 google-api-python-client
 python-dotenv
+google-api-python-client
+transformers
