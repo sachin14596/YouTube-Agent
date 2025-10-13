@@ -6,3 +6,7 @@ google-api-python-client
 python-dotenv
 google-api-python-client
 transformers
+torch
+youtube-transcript-api
+langgraph
+langchain-core
