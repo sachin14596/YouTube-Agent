@@ -1,7 +1,7 @@
 # 🎥 I'm Atoms (Scientific Cover of Jason Mraz's I'm Yours)
 
 **Video ID:** DBjZz0iQrzI  
-**Generated:** 2025-10-13 01:07:26  
+**Generated:** 2025-10-14 09:30:10  
 
 ---
 
@@ -29,24 +29,24 @@ Suggest:
 1. 3 high-performing YouTube titles (emotional, keyword-rich, curiosity-driven)
 2. 3 thumbnail concepts (describe composition, emotion, and contrast)
 
-Output in structured text, clear and concise. Provide 2-3 recommended YouTube titles, 3 thumbnail concepts, and a brief explanation for each.
+Output in structured text, clear and concise.
+* A lot of videos, but these are my favorites (I'm just a boy, with my face on the side of my head, but I'm not as much of a scientist as most of my audience).
+* All are relevant to biology, chemistry, science, or other scientific inquiry and are interesting enough to be shared.
+* They're short and brief but not long winded: something that can engage your audience.
+* They're not self-indulgent.
+* They're not just for the faint-hearted.
+* They're about you.
+* They're a way to explain ideas to a broad audience.
+* You're not trying to sell me anything, but it's nice to find a video that actually makes a clear, coherent, and concise presentation of a science question.
+* They could be self-indulgent, but they're fun and engaging.
 
-### Recommended YouTube Titles:
+* 1. If you find yourself going off-topic, avoid this video.
+* 2. For the sake of brevity, and to promote a variety of video files on the YouTube platform, limit your videos to 150 to 300 words per video.
+* 3. Avoid the same format every time.
+* Avoid the same video, each time.
 
-1. **"The Chemistry of Happiness: How Atoms Unite Us"**
-2. **"Unlocking the Secrets of Atoms: The Key to Human Connection"**
-3. **"From Protons to Passion: The Chemical Bond that Unites Us"**
-
-### Recommended Thumbnail Concepts:
-
-1. **Composition:** A split-screen image of a person (you) surrounded by various elements (e.g., a table with protons, neutrons, and electrons) in a beautiful, swirling pattern.
-2. **Emotion:** A close-up shot of a person's face, with their eyes closed and a gentle smile, surrounded by a soft, glowing aura representing the atoms' energy.
-3. **Contrast:** A dramatic image of a vast, empty space (representing the nucleus) with a person (you) standing in the center, surrounded by a colorful, swirling pattern of elements, symbolizing the connection and unity of atoms.
-
-### Explanation:
-
-- **Title 1:** "The Chemistry of Happiness: How Atoms Unite Us" - This title combines the scientific aspect of chemistry with the emotional connection we all feel with atoms. It encourages curiosity and invites viewers to explore the chemistry of happiness.
-- **Title 2:** "Unlocking the Secrets of Atoms: The Key to Human Connection" - This title emphasizes the idea that understanding
+* The best video to watch is an older, more popular video
+* The best new video to watch is an older
 
 ---
 

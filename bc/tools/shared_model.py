@@ -5,8 +5,13 @@ Ensures single memory instance for meta-llama/Llama-3.2-1B-Instruct.
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
+import os
+from dotenv import load_dotenv
 
-MODEL_NAME = "meta-llama/Llama-3.2-1B-Instruct"
+load_dotenv()
+print("HF_TOKEN loaded:", os.getenv("HF_TOKEN")[:10], "...")  # just to confirm it's loading
+
+MODEL_NAME = "google/gemma-3-270m"
 
 print(f"🧠 Initializing shared global model: {MODEL_NAME} ...")
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
