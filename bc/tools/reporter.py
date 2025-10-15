@@ -1,17 +1,18 @@
 """
-Reporter Tool
--------------
-Phase 3 – Final Step: Compiles all outputs (hook rewrite, title ideas, policy notes)
-into a single Markdown and JSON report for each video.
+Reporter Tool (Phase 3 – Final Step)
+------------------------------------
+Compiles all outputs (hook rewrite, title ideas, policy notes)
+into a single Markdown + JSON report for each analyzed video.
 
 Future Scope:
-- Add nicer Markdown templates with emoji & layout.
-- Integrate auto-eval metrics & supervisor summaries.
+- Add HTML export for web previews.
+- Include supervisor route trace visualization.
 """
 
 import json
 from pathlib import Path
 from datetime import datetime
+import re
 
 
 def reporter():
@@ -46,10 +47,21 @@ def reporter():
         vid = v["video_id"]
         title = v["title"]
 
-        rewrite = rewrites.get(vid, {})
+        rewrite_data = rewrites.get(vid, {})
         title_info = titles.get(vid, {})
         policy_info = policies.get(vid, {})
 
+        # --- Extract clean sections ---
+        rewritten_text = rewrite_data.get("rewritten_script", "No rewrite available.")
+        title_block = title_info.get("ideas", "").strip() or "No title/thumbnail ideas generated."
+
+        # Remove any HTML or junk text (optional sanitization)
+        title_block = re.sub(r"<[^>]+>", "", title_block)
+
+        safe_status = policy_info.get("safe", True)
+        flagged_terms = ", ".join(policy_info.get("flagged_terms", [])) or "None"
+
+        # --- Markdown structure ---
         markdown = f"""# 🎥 {title}
 
 **Video ID:** {vid}  
@@ -58,21 +70,22 @@ def reporter():
 ---
 
 ## 🧠 Hook Rewrite
+> {rewritten_text.strip()}
 
 ---
 
 ## 🪶 Title & Thumbnail Ideas
-{title_info.get("ideas", "No title/thumb ideas generated.")}
+{title_block}
 
 ---
 
 ## 🚦 Policy Check
-**Safe:** {policy_info.get("safe", True)}  
-**Flagged Terms:** {", ".join(policy_info.get("flagged_terms", [])) or "None"}  
+✅ **Safe for all audiences:** {safe_status}  
+**Flagged Terms:** {flagged_terms}
 
 ---
 
-✅ End of Report
+✅ *End of Report*
 """
 
         # Save individual report
@@ -87,8 +100,8 @@ def reporter():
                 {
                     "video_id": vid,
                     "title": title,
-                    "rewrite": rewrite,
-                    "titles": title_info,
+                    "hook_rewrite": rewritten_text,
+                    "title_thumb": title_block,
                     "policy": policy_info,
                 },
                 f,
@@ -98,7 +111,7 @@ def reporter():
         summary.append({
             "video_id": vid,
             "title": title,
-            "safe": policy_info.get("safe", True),
+            "safe": safe_status,
             "report_file": str(md_path)
         })
 

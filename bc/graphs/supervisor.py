@@ -6,7 +6,10 @@ from typing import Dict, Any, List
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # ---- Config ----
-MODEL_NAME = "meta-llama/Llama-3.2-1B-Instruct"
+#MODEL_NAME = "google/gemma-3-270m"
+#MODEL_NAME = "meta-llama/Llama-3.2-1B-Instruct"
+MODEL_NAME = "Qwen/Qwen2.5-0.5B-Instruct"
+
 ALLOWED_NODES = ["analyze_hook", "rewrite", "titlethumb", "policy", "report"]
 
 class Supervisor:

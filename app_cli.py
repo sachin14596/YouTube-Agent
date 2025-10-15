@@ -7,6 +7,7 @@ def main():
     parser.add_argument("--channel", required=True, help="YouTube channel ID")
     parser.add_argument("--limit", type=int, default=5, help="How many videos to process")
     parser.add_argument("--age", type=int, default=180, help="Minimum age (days) for back-catalog filter")
+    parser.add_argument("--clean", action="store_true", help="Clean old outputs before running")  # ✅ new flag
     args = parser.parse_args()
 
     if args.command == "ingest":

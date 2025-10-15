@@ -5,6 +5,7 @@ Purpose: Rewrites the hook zone (first 60–90s transcript) using a shared globa
 
 from pathlib import Path
 import json
+import re
 from bc.tools.shared_model import model, tokenizer, device, MODEL_NAME
 
 
@@ -13,6 +14,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 ARTIFACTS = BASE_DIR / "outputs" / "artifacts"
 OUT_PATH = BASE_DIR / "outputs" / "suggestions"
 OUT_PATH.mkdir(parents=True, exist_ok=True)
+
+
+# --- Helper: cleanup function ---
+def clean_text(txt: str) -> str:
+    txt = re.sub(r"<[^>]+>", "", txt)  # remove HTML tags
+    txt = re.sub(r"(?i)(transcript|rewrite|title|output).*?:", "", txt)  # remove prompt headers
+    txt = re.sub(r"\s+", " ", txt)
+    return txt.strip()
 
 
 # === HOOK REWRITE LOGIC ===
@@ -36,20 +45,22 @@ def hook_rewrite():
             continue
 
         prompt = (
-            f"Rewrite the following YouTube intro to make it more engaging and curiosity-driven.\n\n"
+            f"Rewrite the following YouTube intro to make it more engaging, clear, and curiosity-driven.\n\n"
             f"Title: {title}\n\n"
             f"Transcript:\n{transcript}\n\n"
-            f"---\nOutput a rewritten version with better pacing, emotional grip, and clarity."
+            f"---\nOutput only the improved rewritten version — do not include any instructions or explanations."
         )
 
         inputs = tokenizer(prompt, return_tensors="pt").to(device)
         outputs = model.generate(**inputs, max_new_tokens=300)
         rewritten_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
+        cleaned = clean_text(rewritten_text)
+
         rewrites.append({
             "video_id": vid["video_id"],
             "title": title,
-            "rewritten_script": rewritten_text.strip(),
+            "rewritten_script": cleaned,
             "model": MODEL_NAME
         })
 

@@ -5,6 +5,7 @@ Purpose: Suggests new titles and thumbnail ideas for each video using shared glo
 
 from pathlib import Path
 import json
+import re
 from bc.tools.shared_model import model, tokenizer, device, MODEL_NAME
 
 
@@ -13,6 +14,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 ARTIFACTS = BASE_DIR / "outputs" / "artifacts"
 SUGGESTIONS = BASE_DIR / "outputs" / "suggestions"
 SUGGESTIONS.mkdir(parents=True, exist_ok=True)
+
+
+# --- Helper: cleanup function ---
+def clean_text(txt: str) -> str:
+    txt = re.sub(r"<[^>]+>", "", txt)  # remove HTML
+    txt = re.sub(r"(?i)(video title|transcript|suggest|output).*?:", "", txt)
+    txt = re.sub(r"\s+", " ", txt)
+    return txt.strip()
 
 
 # === TITLE + THUMBNAIL GENERATOR ===
@@ -34,22 +43,24 @@ def title_thumb_scout():
             continue
 
         prompt = (
-            f"You are an expert YouTube strategist.\n\n"
-            f"Video Title: {title}\n\n"
+            f"You are an expert YouTube strategist.\n"
+            f"Generate exactly 3 creative, high-performing video titles and 3 thumbnail ideas "
+            f"for this video.\n\n"
+            f"Title: {title}\n\n"
             f"Transcript snippet:\n{transcript}\n\n"
-            f"Suggest:\n1. 3 high-performing YouTube titles (emotional, keyword-rich, curiosity-driven)\n"
-            f"2. 3 thumbnail concepts (describe composition, emotion, and contrast)\n\n"
-            f"Output in structured text, clear and concise."
+            f"Respond in clean structured text only (no instructions or explanations)."
         )
 
         inputs = tokenizer(prompt, return_tensors="pt").to(device)
         outputs = model.generate(**inputs, max_new_tokens=300)
         ideas = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
+        cleaned = clean_text(ideas)
+
         results.append({
             "video_id": vid["video_id"],
             "title": title,
-            "ideas": ideas,
+            "ideas": cleaned,
             "model": MODEL_NAME
         })
 
