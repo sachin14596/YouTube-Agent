@@ -1,0 +1,25 @@
+start	end	text
+0	7500	Firebase Storage is now officially supported by Angular Fire 2, which means uploading files
+7500	11300	from an Angular application is easier than ever before.
+11300	15300	In this episode I'm going to take you through the new features in the Angular Fire 2 storage
+15300	20240	module, then we'll use it to build a drop zone file uploader from scratch.
+20240	24560	In addition to uploading files to Firebase Storage, it can also control the entire upload
+24560	28200	process by pausing, canceling, or resuming an upload.
+28600	31760	There's a whole bunch of other cool stuff I want to show you, but first make sure to
+31760	36900	like and subscribe and grab the source code from AngularFirebase.com.
+36900	40400	Before we jump into the code, I want to give you a few more details about how the Angular
+40400	42660	Fire 2 storage module works.
+42660	47540	When we drag and drop a file, it's going to start an Angular Fire upload task, which will
+47540	51260	immediately start uploading the file to your Firebase storage bucket.
+51260	54360	You can then monitor the upload progress as an observable.
+54360	58200	The snapshot is emitted several times per second, so you can do things like update your
+58200	62040	progress bar or just provide the user with some helpful feedback.
+62040	65440	When the process is complete, it will give you back the download URL that you can show
+65440	67520	in your front end UI.
+67520	69000	Now let's go ahead and build this thing.
+69000	73280	We'll start with a brand new Angular Fire app, and then inside that project, install Angular
+73280	75520	Fire 2 and Firebase.
+75520	80440	Then inside of your Angular environment, add your Firebase project config.
+80440	84560	And lastly, we'll go into the app module and initialize our Angular Fire app.
+84560	89160	I'm bringing in both the Angular Fire Storage module and the Firestore database for some
+89160	90000	advanced stuff I'll show you.

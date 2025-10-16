@@ -1,0 +1,96 @@
+1
+00:00:00,000 --> 00:00:07,500
+Firebase Storage is now officially supported by Angular Fire 2, which means uploading files
+
+2
+00:00:07,500 --> 00:00:11,300
+from an Angular application is easier than ever before.
+
+3
+00:00:11,300 --> 00:00:15,300
+In this episode I'm going to take you through the new features in the Angular Fire 2 storage
+
+4
+00:00:15,300 --> 00:00:20,240
+module, then we'll use it to build a drop zone file uploader from scratch.
+
+5
+00:00:20,240 --> 00:00:24,560
+In addition to uploading files to Firebase Storage, it can also control the entire upload
+
+6
+00:00:24,560 --> 00:00:28,200
+process by pausing, canceling, or resuming an upload.
+
+7
+00:00:28,600 --> 00:00:31,760
+There's a whole bunch of other cool stuff I want to show you, but first make sure to
+
+8
+00:00:31,760 --> 00:00:36,900
+like and subscribe and grab the source code from AngularFirebase.com.
+
+9
+00:00:36,900 --> 00:00:40,400
+Before we jump into the code, I want to give you a few more details about how the Angular
+
+10
+00:00:40,400 --> 00:00:42,660
+Fire 2 storage module works.
+
+11
+00:00:42,660 --> 00:00:47,540
+When we drag and drop a file, it's going to start an Angular Fire upload task, which will
+
+12
+00:00:47,540 --> 00:00:51,260
+immediately start uploading the file to your Firebase storage bucket.
+
+13
+00:00:51,260 --> 00:00:54,360
+You can then monitor the upload progress as an observable.
+
+14
+00:00:54,360 --> 00:00:58,200
+The snapshot is emitted several times per second, so you can do things like update your
+
+15
+00:00:58,200 --> 00:01:02,040
+progress bar or just provide the user with some helpful feedback.
+
+16
+00:01:02,040 --> 00:01:05,440
+When the process is complete, it will give you back the download URL that you can show
+
+17
+00:01:05,440 --> 00:01:07,520
+in your front end UI.
+
+18
+00:01:07,520 --> 00:01:09,000
+Now let's go ahead and build this thing.
+
+19
+00:01:09,000 --> 00:01:13,280
+We'll start with a brand new Angular Fire app, and then inside that project, install Angular
+
+20
+00:01:13,280 --> 00:01:15,520
+Fire 2 and Firebase.
+
+21
+00:01:15,520 --> 00:01:20,440
+Then inside of your Angular environment, add your Firebase project config.
+
+22
+00:01:20,440 --> 00:01:24,560
+And lastly, we'll go into the app module and initialize our Angular Fire app.
+
+23
+00:01:24,560 --> 00:01:29,160
+I'm bringing in both the Angular Fire Storage module and the Firestore database for some
+
+24
+00:01:29,160 --> 00:01:30,000
+advanced stuff I'll show you.
+

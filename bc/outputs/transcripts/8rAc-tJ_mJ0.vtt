@@ -1,0 +1,74 @@
+WEBVTT
+
+00:00.000 --> 00:05.500
+Database profiling is critical for finding bottlenecks or other issues that might be degrading
+
+00:05.500 --> 00:07.340
+the user experience.
+
+00:07.340 --> 00:11.140
+In this episode, we're going to look at the built in Firebase Profiler tool, which will
+
+00:11.140 --> 00:15.540
+give us a breakdown of the memory and speed performance of our database.
+
+00:15.540 --> 00:19.300
+This tutorial is done in the context of an Angular application, but it can just as easily
+
+00:19.300 --> 00:23.060
+be applied to the Firebase JavaScript SDK.
+
+00:23.060 --> 00:26.980
+If you're just getting started with Firebase, you'll need to install the Firebase Tools
+
+00:26.980 --> 00:33.340
+command line interface and then initialize your project by running Firebase init.
+
+00:33.340 --> 00:36.600
+To demonstrate this feature, we're going to read and write a bunch of weather data in
+
+00:36.600 --> 00:41.220
+the Firebase database, which I've acquired here from the dark sky API.
+
+00:41.220 --> 00:45.940
+So I went ahead and parsed this JSON into JavaScript, and then I'm importing it in an Angular
+
+00:45.940 --> 00:47.460
+component here.
+
+00:47.460 --> 00:51.220
+When we save the data to Firebase, it's going to look like this, a big object with its
+
+00:51.220 --> 00:55.460
+own nested objects and arrays, not something you would consider optimized for efficiency
+
+00:55.460 --> 00:58.260
+in a no-sequel database.
+
+00:58.260 --> 01:02.620
+Then back in the Angular component, I'm going to create an observable stopwatch, which
+
+01:02.620 --> 01:06.900
+will help us determine the actual latency the user sees on the front end.
+
+01:06.900 --> 01:10.540
+So we can start the stopwatch as soon as we make a request, and then as soon as Firebase
+
+01:10.540 --> 01:14.860
+returns this actual object, we'll stop the stopwatch, and then I'll display that number
+
+01:14.860 --> 01:16.940
+in milliseconds on the front end.
+
+01:16.940 --> 01:21.940
+We can do this in our xjs by creating an observable interval that ticks every one millisecond,
+
+01:21.940 --> 01:25.940
+and to finish the stopwatch, we just call unsubscribe on it.
+
+01:25.940 --> 01:29.740
+Then going down into the Angular component, we can just create a new instance of the
+
+01:29.740 --> 01:29.980
+stopwatch.
+

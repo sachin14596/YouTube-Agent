@@ -1,14 +1,26 @@
 [
   {
-    "video_id": "jeqOYqRYtyY",
-    "title": "Our Sun Sol: 2014",
+    "video_id": "mBPURBO1kD8",
+    "title": "Reddit Inspired Upvoting System with Angular and Firebase NoSQL",
     "safe": true,
-    "report_file": "bc\\outputs\\reports\\jeqOYqRYtyY.md"
+    "report_file": "bc\\outputs\\reports\\mBPURBO1kD8.md"
   },
   {
-    "video_id": "3toAqpn8sQs",
-    "title": "Our Sun Sol: July to December 2013",
+    "video_id": "8rAc-tJ_mJ0",
+    "title": "Firebase Database Performance Profiling",
     "safe": true,
-    "report_file": "bc\\outputs\\reports\\3toAqpn8sQs.md"
+    "report_file": "bc\\outputs\\reports\\8rAc-tJ_mJ0.md"
+  },
+  {
+    "video_id": "1FOfL6bDSF4",
+    "title": "Short Imports with TypeScript Path Mapping",
+    "safe": true,
+    "report_file": "bc\\outputs\\reports\\1FOfL6bDSF4.md"
+  },
+  {
+    "video_id": "wRWZQwiNFnM",
+    "title": "AngularFire2 Storage -  File Upload Dropzone",
+    "safe": true,
+    "report_file": "bc\\outputs\\reports\\wRWZQwiNFnM.md"
   }
 ]

@@ -1,12 +1,13 @@
 """
 Tool: title_thumb_scout.py
-Purpose: Suggests new titles and thumbnail ideas for each video using shared global LLM.
+Purpose: Suggests new titles and thumbnail ideas for each video using AWS Bedrock.
+Structured output enforced (JSON schema) for cleaner downstream reports.
 """
 
 from pathlib import Path
 import json
 import re
-from bc.tools.shared_model import model, tokenizer, device, MODEL_NAME
+from bc.tools.shared_bedrock import generate_bedrock_response
 
 
 # === PATHS ===
@@ -15,16 +16,24 @@ ARTIFACTS = BASE_DIR / "outputs" / "artifacts"
 SUGGESTIONS = BASE_DIR / "outputs" / "suggestions"
 SUGGESTIONS.mkdir(parents=True, exist_ok=True)
 
+# --- Clean previous outputs (fresh run) ---
+for file in SUGGESTIONS.glob("*"):
+    try:
+        file.unlink()
+    except Exception:
+        pass
 
-# --- Helper: cleanup function ---
+
+# --- Helper: cleanup ---
 def clean_text(txt: str) -> str:
-    txt = re.sub(r"<[^>]+>", "", txt)  # remove HTML
-    txt = re.sub(r"(?i)(video title|transcript|suggest|output).*?:", "", txt)
+    """Remove stray tags or markdown if model adds any."""
+    txt = re.sub(r"<[^>]+>", "", txt)
+    txt = txt.replace("```json", "").replace("```", "")
     txt = re.sub(r"\s+", " ", txt)
     return txt.strip()
 
 
-# === TITLE + THUMBNAIL GENERATOR ===
+# --- Core function ---
 def title_thumb_scout():
     videos_file = ARTIFACTS / "videos.json"
     if not videos_file.exists():
@@ -35,6 +44,7 @@ def title_thumb_scout():
         videos = json.load(f)
 
     results = []
+
     for vid in videos:
         title = vid.get("title", "")
         transcript = vid.get("first60_text", "")
@@ -42,30 +52,64 @@ def title_thumb_scout():
             print(f"⚠️ Skipping {title} (no transcript)")
             continue
 
-        prompt = (
-            f"You are an expert YouTube strategist.\n"
-            f"Generate exactly 3 creative, high-performing video titles and 3 thumbnail ideas "
-            f"for this video.\n\n"
-            f"Title: {title}\n\n"
-            f"Transcript snippet:\n{transcript}\n\n"
-            f"Respond in clean structured text only (no instructions or explanations)."
-        )
+        # ---------- Strict JSON Prompt ----------
+        prompt = f"""
+You are a professional YouTube strategist.
 
-        inputs = tokenizer(prompt, return_tensors="pt").to(device)
-        outputs = model.generate(**inputs, max_new_tokens=300)
-        ideas = tokenizer.decode(outputs[0], skip_special_tokens=True)
+Analyze the following video snippet and propose optimized content ideas.
 
-        cleaned = clean_text(ideas)
+Video Title: {title}
+Transcript Snippet: {transcript}
+
+Respond ONLY in the following JSON structure:
+{{
+  "titles": [
+    "Title 1",
+    "Title 2",
+    "Title 3"
+  ],
+  "thumbnails": [
+    {{
+      "concept": "Brief visual composition",
+      "emotion": "Main emotion evoked",
+      "contrast": "Key visual contrast or focal point"
+    }},
+    {{
+      "concept": "...",
+      "emotion": "...",
+      "contrast": "..."
+    }},
+    {{
+      "concept": "...",
+      "emotion": "...",
+      "contrast": "..."
+    }}
+  ]
+}}
+Ensure valid JSON — no explanations or markdown.
+        """
+
+        # ---------- Model Inference ----------
+        raw_output = generate_bedrock_response(prompt, max_tokens=300)
+        cleaned = clean_text(raw_output)
+
+        # ---------- Parse JSON ----------
+        try:
+            ideas_json = json.loads(cleaned)
+        except json.JSONDecodeError:
+            print(f"⚠️ JSON decode failed for {title}, storing raw text.")
+            ideas_json = {"titles": [], "thumbnails": [], "raw": cleaned}
 
         results.append({
             "video_id": vid["video_id"],
             "title": title,
-            "ideas": cleaned,
-            "model": MODEL_NAME
+            "ideas": ideas_json,
+            "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
         })
 
         print(f"✅ Generated ideas for: {title}")
 
+    # ---------- Save Output ----------
     out_file = SUGGESTIONS / "titlethumb.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)

@@ -22,7 +22,6 @@ def _channel_uploads_playlist_id(channel_id: str) -> str:
     return items[0]["contentDetails"]["relatedPlaylists"]["uploads"]
 
 def _list_all_uploads(playlist_id: str, max_pages: int = 200):
-    """Return list of {video_id, title, publishedAt} for *all* uploads (up to max_pages)."""
     yt = _youtube()
     token = None
     out = []
@@ -57,7 +56,6 @@ def _chunk(ids, n=50):
         yield ids[i:i+n]
 
 def _attach_stats(videos):
-    """Add viewCount & commentCount to each video."""
     yt = _youtube()
     id_to_video = {v["video_id"]: v for v in videos}
     for chunk in _chunk(list(id_to_video.keys()), 50):
@@ -74,34 +72,31 @@ def _attach_stats(videos):
 
 def select_backcatalog_candidates(channel_id: str, age_days_min: int = 180, pool_size: int = 100, limit: int = 5):
     """
-    Returns top 'limit' revival candidates (list of dicts):
-    fields: video_id, title, publishedAt, age_days, views_per_day, comments_per_1k, selection_score
+    Dynamically selects top 'limit' back-catalog candidates older than 'age_days_min' days.
     """
+    print(f"🔎 Fetching videos older than {age_days_min} days...")
     uploads_pl = _channel_uploads_playlist_id(channel_id)
     uploads = _list_all_uploads(uploads_pl, max_pages=200)
 
     today = dt.date.today()
-    # filter by age
     aged = []
     for v in uploads:
         d = _iso_to_date(v["publishedAt"])
         age_days = max(1, (today - d).days)
         if age_days >= age_days_min:
-            v = dict(v)  # copy
+            v = dict(v)
             v["age_days"] = age_days
             aged.append(v)
+
+    print(f"📦 Found {len(aged)} videos meeting the age filter ({age_days_min}+ days).")
 
     if not aged:
         return []
 
-    # keep only oldest 'pool_size'
     aged.sort(key=lambda x: x["age_days"], reverse=True)
     pool = aged[:pool_size]
-
-    # attach stats
     pool = _attach_stats(pool)
 
-    # compute signals
     vpd_vals = []
     for v in pool:
         views = v.get("viewCount", 0)
@@ -112,15 +107,13 @@ def select_backcatalog_candidates(channel_id: str, age_days_min: int = 180, pool
         if v["views_per_day"] > 0:
             vpd_vals.append(v["views_per_day"])
 
-    # channel median velocity (from pool)
     vpd_vals.sort()
     median_vpd = vpd_vals[len(vpd_vals)//2] if vpd_vals else 0.0
 
-    # scoring: older + under median velocity + decent comments density
     def score(v):
-        age_score = min(1.0, v["age_days"] / 365.0)          # cap at 1 year
+        age_score = min(1.0, v["age_days"] / 365.0)
         under_vel = 1.0 if v["views_per_day"] < median_vpd else 0.3
-        engagement = min(1.0, v["comments_per_1k"] / 2.0)    # 2 comments per 1k views ≈ good
+        engagement = min(1.0, v["comments_per_1k"] / 2.0)
         return 0.4*age_score + 0.4*under_vel + 0.2*engagement
 
     for v in pool:
@@ -129,9 +122,9 @@ def select_backcatalog_candidates(channel_id: str, age_days_min: int = 180, pool
     ranked = sorted(pool, key=lambda x: x["selection_score"], reverse=True)
     top = ranked[:limit]
 
-    # drop heavy stats we don’t need beyond selection (optional)
     for v in top:
         v.pop("viewCount", None)
         v.pop("commentCount", None)
 
+    print(f"🏁 Returning top {len(top)} ranked candidates.")
     return top

@@ -1,12 +1,13 @@
 """
 Tool: hook_rewrite.py
-Purpose: Rewrites the hook zone (first 60–90s transcript) using a shared global LLM model.
+Purpose: Rewrites the hook zone (first 60–90s transcript) using AWS Bedrock.
+Structured output enforced (JSON schema) for consistent downstream reporting.
 """
 
 from pathlib import Path
 import json
 import re
-from bc.tools.shared_model import model, tokenizer, device, MODEL_NAME
+from bc.tools.shared_bedrock import generate_bedrock_response
 
 
 # === PATHS ===
@@ -15,11 +16,19 @@ ARTIFACTS = BASE_DIR / "outputs" / "artifacts"
 OUT_PATH = BASE_DIR / "outputs" / "suggestions"
 OUT_PATH.mkdir(parents=True, exist_ok=True)
 
+# --- Clean previous outputs ---
+for file in OUT_PATH.glob("*"):  # or SUGGESTIONS.glob("*")
+    try:
+        file.unlink()
+    except Exception:
+        pass
 
-# --- Helper: cleanup function ---
+
+# --- Helper: cleanup ---
 def clean_text(txt: str) -> str:
-    txt = re.sub(r"<[^>]+>", "", txt)  # remove HTML tags
-    txt = re.sub(r"(?i)(transcript|rewrite|title|output).*?:", "", txt)  # remove prompt headers
+    """Clean HTML or Markdown noise from model output."""
+    txt = txt.replace("```json", "").replace("```", "")
+    txt = re.sub(r"<[^>]+>", "", txt)
     txt = re.sub(r"\s+", " ", txt)
     return txt.strip()
 
@@ -44,24 +53,53 @@ def hook_rewrite():
             print(f"⚠️ Skipping {title} (no transcript)")
             continue
 
-        prompt = (
-            f"Rewrite the following YouTube intro to make it more engaging, clear, and curiosity-driven.\n\n"
-            f"Title: {title}\n\n"
-            f"Transcript:\n{transcript}\n\n"
-            f"---\nOutput only the improved rewritten version — do not include any instructions or explanations."
-        )
+        # ---------- Structured Prompt ----------
+        prompt = f"""
+You are a professional YouTube script editor specialized in audience retention.
 
-        inputs = tokenizer(prompt, return_tensors="pt").to(device)
-        outputs = model.generate(**inputs, max_new_tokens=300)
-        rewritten_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+Task:
+Rewrite the first 60–90 seconds of a YouTube video (the "hook zone") to make it clearer, emotionally engaging, and curiosity-driven.
 
-        cleaned = clean_text(rewritten_text)
+Guidelines:
+- Keep the rewritten text conversational, natural, and hook-focused.
+- Start with a punchy opener (a surprising fact, question, or bold statement).
+- Maintain accuracy and avoid robotic tone.
+- Keep length under 180 words.
+- Return ONLY JSON — no explanations.
+
+Video Title: {title}
+Transcript: {transcript}
+
+Respond ONLY in this JSON format:
+{{
+  "rewritten_script": "Your improved version only",
+  "style_notes": [
+    "Short note 1",
+    "Short note 2"
+  ]
+}}
+        """
+
+        # ---------- Model Inference ----------
+        raw_output = generate_bedrock_response(prompt, max_tokens=300)
+        cleaned = clean_text(raw_output)
+
+        # ---------- Parse JSON ----------
+        try:
+            parsed = json.loads(cleaned)
+        except json.JSONDecodeError:
+            print(f"⚠️ JSON decode failed for {title}, saving raw output.")
+            parsed = {
+                "rewritten_script": cleaned,
+                "style_notes": ["(Unstructured output)"]
+            }
 
         rewrites.append({
             "video_id": vid["video_id"],
             "title": title,
-            "rewritten_script": cleaned,
-            "model": MODEL_NAME
+            "rewritten_script": parsed.get("rewritten_script", ""),
+            "style_notes": parsed.get("style_notes", []),
+            "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
         })
 
         print(f"✅ Rewritten: {title}")

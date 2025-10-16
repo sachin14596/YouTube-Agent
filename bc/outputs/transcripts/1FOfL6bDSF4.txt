@@ -1,0 +1,23 @@
+I need to start this video off on a sad note.
+On New Year's Day, I lost my father unexpectedly at the age of 57.
+He lived a good full life, but I just want to remind everybody to enjoy the time you have
+with your family because it can end before you know it.
+I'd like to say thank you to everybody who supports this project, and I look forward to
+bringing you a whole bunch of awesome resources in 2018.
+To kick things off, I'm going to give you a quick, angular productivity booster to eliminate
+long relative paths that look like this to a single global namespace.
+This means you can give all of your feature modules a specific namespace, and you never
+really have to worry about relative paths within your project.
+To demonstrate this, I'm starting off in a brand new Angular 5 app, and I'm going to generate
+a couple of ng modules, first one being core, second one being shared.
+From there I'm going to generate a service inside of the core module, we'll just go ahead
+and call this the off service.
+And I'm going to generate a component, but for no reason at all I'm going to nest this
+deeply within the file structure of the project.
+Let's go ahead and call it the deeply nested user login component.
+Then if we look at the file structure on the left, you can see the actual component file
+itself is nested about six levels deep within our project.
+This isn't really a problem, unless we need to import this file in a different file that's
+nested higher up.
+So let's try this by importing the service into the component.
+Just a quick side tip here, whenever you...

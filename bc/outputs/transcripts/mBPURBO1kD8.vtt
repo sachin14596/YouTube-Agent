@@ -1,0 +1,53 @@
+WEBVTT
+
+00:00.000 --> 00:06.020
+In this episode, we're going to build a reddit style upvoting, downvoting system using angular
+
+00:06.020 --> 00:08.020
+form firebase.
+
+00:08.020 --> 00:13.420
+In this example, we have a collection of items already in the database, and we also have
+
+00:13.420 --> 00:16.420
+firebase authentication setup in our app.
+
+00:16.420 --> 00:20.060
+If you're new to firebase authentication, I've added a couple links in the description
+
+00:20.060 --> 00:22.820
+with more details.
+
+00:22.820 --> 00:28.860
+The first thing we need to think about is modeling our data in the firebase, no SQL database.
+
+00:28.860 --> 00:32.560
+Our database needs to answer two fundamental questions.
+
+00:32.560 --> 00:40.280
+What is the user's vote for a given item, and what's the total vote count for a given item?
+
+00:40.280 --> 00:47.360
+We can answer this question by creating a collection based on the unique idea of the items.
+
+00:47.360 --> 00:51.800
+For each item ID, we save the user IDs that have voted on that item.
+
+00:51.800 --> 00:56.520
+This way we can query an item and see if the user's voted on it, and we can also tally
+
+00:56.520 --> 01:00.920
+up the collection of users under an item to get the total vote count.
+
+01:00.920 --> 01:04.840
+Let's start by building the service.
+
+01:04.840 --> 01:19.720
+The first thing we need is the firebase object observable for a specific item ID.
+
+01:19.720 --> 01:26.440
+We also need the user to be able to cast the vote by updating the item object in the database.
+
+01:26.440 --> 01:29.960
+The update user vote function will send a new key value pair to the...
+

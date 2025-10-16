@@ -1,6 +1,5 @@
 import os
-import time
-import textwrap
+import shutil
 import subprocess
 import streamlit as st
 
@@ -32,14 +31,27 @@ limit = st.sidebar.number_input(
 run_btn = st.sidebar.button("🚀 Run Agent")
 
 # ---------- PATHS ----------
-reports_dir = "bc/outputs/reports"
+base_outputs = "bc/outputs"
+reports_dir = os.path.join(base_outputs, "reports")
+artifacts_dir = os.path.join(base_outputs, "artifacts")
+suggestions_dir = os.path.join(base_outputs, "suggestions")
 
 # ---------- HELPERS ----------
 def valid_channel(ch: str) -> bool:
     return bool(ch and len(ch.strip()) > 5)
 
+def clean_outputs():
+    """Remove old run folders before a new analysis."""
+    for p in [reports_dir, artifacts_dir, suggestions_dir]:
+        if os.path.exists(p):
+            shutil.rmtree(p)
+            print(f"🧹 Cleared old folder: {p}")
+    os.makedirs(reports_dir, exist_ok=True)
+    os.makedirs(artifacts_dir, exist_ok=True)
+    os.makedirs(suggestions_dir, exist_ok=True)
+
 def run_cmd(cmd_list):
-    """Run a command quietly but capture logs."""
+    """Run subprocess and capture logs quietly."""
     process = subprocess.Popen(cmd_list, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     logs = ""
     for line in process.stdout:
@@ -53,22 +65,28 @@ if run_btn:
         st.error("Please enter a valid Channel ID or URL.")
         st.stop()
 
-    st.success(f"🎯 Targeting videos older than {age_days} days (Top {limit})")
+    st.info(f"📡 Parameters: Channel={channel_id}, Age ≥ {age_days} days, Limit={limit}")
     st.markdown("---")
 
-    # Single unified spinner
+    # 🧹 Clean old run folders before processing
+    st.warning("🧹 Cleaning old outputs from previous runs...")
+    clean_outputs()
+
     with st.spinner("🤖 Agent analyzing your channel and optimizing hooks..."):
         # 1️⃣ Ingest step
-        rc1, _ = run_cmd([
+        rc1, logs_ingest = run_cmd([
             "python", "app_cli.py", "ingest",
             "--channel", channel_id,
-            "--limit", str(limit)
+            "--limit", str(limit),
+            "--age-days", str(age_days)
         ])
+
         # 2️⃣ Agentic LangGraph workflow
         if rc1 == 0:
-            rc2, _ = run_cmd(["python", "-m", "bc.graphs.uplift_graph"])
+            rc2, logs_agent = run_cmd(["python", "-m", "bc.graphs.uplift_graph"])
         else:
             st.error("❌ Ingest failed — please check console logs.")
+            st.text_area("📄 Ingest Logs", logs_ingest, height=250)
             st.stop()
 
     st.success("✅ Agentic workflow completed successfully!")
@@ -84,7 +102,6 @@ if run_btn:
                 with open(report_path, "r", encoding="utf-8") as fh:
                     content = fh.read()
 
-                # Render formatted Markdown
                 st.markdown(f"### 📽 {f.replace('.md','').replace('_',' ').title()}")
                 st.markdown(content)
                 st.download_button(

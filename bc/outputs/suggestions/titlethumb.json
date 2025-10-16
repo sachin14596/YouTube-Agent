@@ -1,8 +1,118 @@
 [
   {
-    "video_id": "3toAqpn8sQs",
-    "title": "Our Sun Sol: July to December 2013",
-    "ideas": "You are an expert YouTube strategist. Generate exactly 3 creative, high-performing video titles and 3 thumbnail ideas for this video. Title: Our Sun Sol: July to December 2013 . . . . . . Respond in clean structured text only (no instructions or explanations). Instructive title: \"Sunrise and Sunset Stories of July to December 2013\" Thumbnail idea: A serene landscape with a golden sun setting on the horizon. A sunset painting capturing the beauty of the day's end. The background is a calm lake surrounded by trees. A small child holding onto a tree branch as they watch the sunrise. This scene could be used to showcase the changing seasons and the beauty of nature. These three titles and thumbnails should effectively communicate the theme of the video while grabbing attention and providing a clear understanding of what viewers can expect from the content. Remember to keep them concise and engaging to ensure viewers stay interested throughout the entire duration of the video. #SunriseSunset #NatureExploration #SeasonalScenery #GreenLiving I'm ready when you are! Let's move forward now. 🌞✨ #YouTubeStrategy #ExpertStrategist #YouTubeVideo #StrategicPlanning #ContentCreation #VideoProduction #CreativeMarketing #SocialMediaOptimization #SEOTips #DigitalMarketing #BusinessStrategies #ProductivityHacks #TechTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips #TravelTips #FoodTips",
-    "model": "Qwen/Qwen2.5-0.5B-Instruct"
+    "video_id": "mBPURBO1kD8",
+    "title": "Reddit Inspired Upvoting System with Angular and Firebase NoSQL",
+    "ideas": {
+      "titles": [
+        "Building a Reddit-Style Upvoting System with Angular and Firebase NoSQL: Part 1",
+        "Firebase NoSQL Database Modeling for a Reddit-Style Upvoting System",
+        "Implementing Firebase Authentication in a Reddit-Style Upvoting System"
+      ],
+      "thumbnails": [
+        {
+          "concept": "Angular and Firebase development",
+          "emotion": "Curiosity",
+          "contrast": "Code snippet on a computer screen"
+        },
+        {
+          "concept": "Firebase NoSQL database schema",
+          "emotion": "Understanding",
+          "contrast": "Database diagram on a whiteboard"
+        },
+        {
+          "concept": "Firebase authentication setup",
+          "emotion": "Security",
+          "contrast": "Lock icon on a computer screen"
+        }
+      ]
+    },
+    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
+  },
+  {
+    "video_id": "8rAc-tJ_mJ0",
+    "title": "Firebase Database Performance Profiling",
+    "ideas": {
+      "titles": [
+        "Mastering Firebase Database Performance: A Step-by-Step Guide",
+        "Optimize Your Firebase Database with Built-in Profiling Tools",
+        "Unlock Faster Firebase Database Performance with Pro Tips"
+      ],
+      "thumbnails": [
+        {
+          "concept": "Firebase Profiler tool",
+          "emotion": "Curiosity",
+          "contrast": "Firebase logo and a clock icon"
+        },
+        {
+          "concept": "Angular application",
+          "emotion": "Excitement",
+          "contrast": "Angular logo and a gear icon"
+        },
+        {
+          "concept": "Firebase database performance metrics",
+          "emotion": "Confidence",
+          "contrast": "Firebase logo and a graph icon"
+        }
+      ]
+    },
+    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
+  },
+  {
+    "video_id": "1FOfL6bDSF4",
+    "title": "Short Imports with TypeScript Path Mapping",
+    "ideas": {
+      "titles": [
+        "Angular Productivity Boosters: Eliminate Relative Paths with TypeScript Path Mapping",
+        "Angular 5: Simplify Your Codebase with Single Global Namespace",
+        "From Relative Paths to Global Namespaces: Angular TypeScript Path Mapping Tutorial"
+      ],
+      "thumbnails": [
+        {
+          "concept": "Angular logo and TypeScript code",
+          "emotion": "Intrigue",
+          "contrast": "Angular icon and code snippet"
+        },
+        {
+          "concept": "Before-and-after code comparison",
+          "emotion": "Amazement",
+          "contrast": "Code snippets with red 'before' and green 'after' highlights"
+        },
+        {
+          "concept": "Developer working on a project with a family photo in the background",
+          "emotion": "Nostalgia",
+          "contrast": "Code editor and a photo of a loved one"
+        }
+      ]
+    },
+    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
+  },
+  {
+    "video_id": "wRWZQwiNFnM",
+    "title": "AngularFire2 Storage -  File Upload Dropzone",
+    "ideas": {
+      "titles": [
+        "Mastering AngularFire2 Storage: File Upload and Dropzone",
+        "AngularFire2 Storage: Unlocking Seamless File Uploads",
+        "Building a Dropzone File Uploader with AngularFire2 Storage"
+      ],
+      "thumbnails": [
+        {
+          "concept": "Angular Fire 2 logo with a file icon",
+          "emotion": "Excitement and curiosity",
+          "contrast": "Bright colors and a bold font"
+        },
+        {
+          "concept": "A screenshot of the file upload process",
+          "emotion": "Confidence and understanding",
+          "contrast": "A clear visual representation of the upload progress"
+        },
+        {
+          "concept": "A dropzone file uploader interface",
+          "emotion": "Familiarity and anticipation",
+          "contrast": "A clean and minimalistic design"
+        }
+      ]
+    },
+    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
   }
 ]

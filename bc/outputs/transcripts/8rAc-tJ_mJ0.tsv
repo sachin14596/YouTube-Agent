@@ -1,0 +1,25 @@
+start	end	text
+0	5500	Database profiling is critical for finding bottlenecks or other issues that might be degrading
+5500	7340	the user experience.
+7340	11140	In this episode, we're going to look at the built in Firebase Profiler tool, which will
+11140	15540	give us a breakdown of the memory and speed performance of our database.
+15540	19300	This tutorial is done in the context of an Angular application, but it can just as easily
+19300	23060	be applied to the Firebase JavaScript SDK.
+23060	26980	If you're just getting started with Firebase, you'll need to install the Firebase Tools
+26980	33340	command line interface and then initialize your project by running Firebase init.
+33340	36600	To demonstrate this feature, we're going to read and write a bunch of weather data in
+36600	41220	the Firebase database, which I've acquired here from the dark sky API.
+41220	45940	So I went ahead and parsed this JSON into JavaScript, and then I'm importing it in an Angular
+45940	47460	component here.
+47460	51220	When we save the data to Firebase, it's going to look like this, a big object with its
+51220	55460	own nested objects and arrays, not something you would consider optimized for efficiency
+55460	58260	in a no-sequel database.
+58260	62620	Then back in the Angular component, I'm going to create an observable stopwatch, which
+62620	66900	will help us determine the actual latency the user sees on the front end.
+66900	70540	So we can start the stopwatch as soon as we make a request, and then as soon as Firebase
+70540	74860	returns this actual object, we'll stop the stopwatch, and then I'll display that number
+74860	76940	in milliseconds on the front end.
+76940	81940	We can do this in our xjs by creating an observable interval that ticks every one millisecond,
+81940	85940	and to finish the stopwatch, we just call unsubscribe on it.
+85940	89740	Then going down into the Angular component, we can just create a new instance of the
+89740	89980	stopwatch.

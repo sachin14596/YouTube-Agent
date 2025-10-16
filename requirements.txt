@@ -10,3 +10,6 @@ torch
 youtube-transcript-api
 langgraph
 langchain-core
+boto3
+botocore
+rich

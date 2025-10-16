@@ -1,0 +1,24 @@
+Database profiling is critical for finding bottlenecks or other issues that might be degrading
+the user experience.
+In this episode, we're going to look at the built in Firebase Profiler tool, which will
+give us a breakdown of the memory and speed performance of our database.
+This tutorial is done in the context of an Angular application, but it can just as easily
+be applied to the Firebase JavaScript SDK.
+If you're just getting started with Firebase, you'll need to install the Firebase Tools
+command line interface and then initialize your project by running Firebase init.
+To demonstrate this feature, we're going to read and write a bunch of weather data in
+the Firebase database, which I've acquired here from the dark sky API.
+So I went ahead and parsed this JSON into JavaScript, and then I'm importing it in an Angular
+component here.
+When we save the data to Firebase, it's going to look like this, a big object with its
+own nested objects and arrays, not something you would consider optimized for efficiency
+in a no-sequel database.
+Then back in the Angular component, I'm going to create an observable stopwatch, which
+will help us determine the actual latency the user sees on the front end.
+So we can start the stopwatch as soon as we make a request, and then as soon as Firebase
+returns this actual object, we'll stop the stopwatch, and then I'll display that number
+in milliseconds on the front end.
+We can do this in our xjs by creating an observable interval that ticks every one millisecond,
+and to finish the stopwatch, we just call unsubscribe on it.
+Then going down into the Angular component, we can just create a new instance of the
+stopwatch.

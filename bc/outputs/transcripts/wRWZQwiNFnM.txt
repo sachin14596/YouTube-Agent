@@ -1,0 +1,24 @@
+Firebase Storage is now officially supported by Angular Fire 2, which means uploading files
+from an Angular application is easier than ever before.
+In this episode I'm going to take you through the new features in the Angular Fire 2 storage
+module, then we'll use it to build a drop zone file uploader from scratch.
+In addition to uploading files to Firebase Storage, it can also control the entire upload
+process by pausing, canceling, or resuming an upload.
+There's a whole bunch of other cool stuff I want to show you, but first make sure to
+like and subscribe and grab the source code from AngularFirebase.com.
+Before we jump into the code, I want to give you a few more details about how the Angular
+Fire 2 storage module works.
+When we drag and drop a file, it's going to start an Angular Fire upload task, which will
+immediately start uploading the file to your Firebase storage bucket.
+You can then monitor the upload progress as an observable.
+The snapshot is emitted several times per second, so you can do things like update your
+progress bar or just provide the user with some helpful feedback.
+When the process is complete, it will give you back the download URL that you can show
+in your front end UI.
+Now let's go ahead and build this thing.
+We'll start with a brand new Angular Fire app, and then inside that project, install Angular
+Fire 2 and Firebase.
+Then inside of your Angular environment, add your Firebase project config.
+And lastly, we'll go into the app module and initialize our Angular Fire app.
+I'm bringing in both the Angular Fire Storage module and the Firestore database for some
+advanced stuff I'll show you.

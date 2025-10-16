@@ -82,7 +82,8 @@ All nodes share a **single LLM instance** (`meta-llama/Llama-3.2-1B-Instruct`) t
 ✅ LangGraph workflow completed successfully!
 
 ## Steps
-python app_cli.py ingest --channel UCHnyfMqiRRG1u-2MsSQLbXA --limit 2
+python app_cli.py ingest --channel UCHnyfMqiRRG1u-2MsSQLbXA --limit 1
+python -c "from bc.tools.hook_rewrite import hook_rewrite; hook_rewrite()"
 python -c "from bc.tools.title_thumb_scout import title_thumb_scout; title_thumb_scout()"
 python -c "from bc.tools.policy_guard import policy_guard; policy_guard()"
 python -c "from bc.tools.reporter import reporter; reporter()"

@@ -12,7 +12,6 @@ Future Scope:
 import json
 from pathlib import Path
 from datetime import datetime
-import re
 
 
 def reporter():
@@ -23,6 +22,13 @@ def reporter():
     BASE_SUGGESTIONS = Path("bc/outputs/suggestions")
     REPORTS_DIR = Path("bc/outputs/reports")
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    # --- Clean previous reports ---
+    for file in REPORTS_DIR.glob("*"):
+        try:
+            file.unlink()
+        except Exception:
+            pass
+
 
     # === Input files ===
     videos_file = BASE_ARTIFACTS / "videos.json"
@@ -42,26 +48,40 @@ def reporter():
 
     summary = []
 
-    # === Generate reports ===
+    # === Generate structured reports ===
     for v in videos:
         vid = v["video_id"]
         title = v["title"]
 
         rewrite_data = rewrites.get(vid, {})
-        title_info = titles.get(vid, {})
-        policy_info = policies.get(vid, {})
+        title_data = titles.get(vid, {})
+        policy_data = policies.get(vid, {})
 
-        # --- Extract clean sections ---
+        # --- Extract info safely ---
         rewritten_text = rewrite_data.get("rewritten_script", "No rewrite available.")
-        title_block = title_info.get("ideas", "").strip() or "No title/thumbnail ideas generated."
+        style_notes = rewrite_data.get("style_notes", [])
 
-        # Remove any HTML or junk text (optional sanitization)
-        title_block = re.sub(r"<[^>]+>", "", title_block)
+        ideas = title_data.get("ideas", {})
+        title_list = ideas.get("titles", [])
+        thumb_list = ideas.get("thumbnails", [])
 
-        safe_status = policy_info.get("safe", True)
-        flagged_terms = ", ".join(policy_info.get("flagged_terms", [])) or "None"
+        policy_safe = policy_data.get("safe", True)
+        flagged_terms = policy_data.get("flagged_terms", [])
+        policy_advice = policy_data.get("advice", [])
 
-        # --- Markdown structure ---
+        # --- Build Markdown Section ---
+        md_titles = "\n".join([f"- {t}" for t in title_list]) if title_list else "No title ideas generated."
+        md_thumbs = ""
+        for t in thumb_list:
+            concept = t.get("concept", "")
+            emotion = t.get("emotion", "")
+            contrast = t.get("contrast", "")
+            md_thumbs += f"\n🎨 **Concept:** {concept}\n💡 *Emotion:* {emotion}\n✨ *Contrast:* {contrast}\n"
+
+        md_notes = "\n".join([f"- {n}" for n in style_notes]) if style_notes else "No style notes."
+        md_policy_advice = "\n".join([f"- {p}" for p in policy_advice]) if policy_advice else "No specific advice."
+
+        # --- Markdown template ---
         markdown = f"""# 🎥 {title}
 
 **Video ID:** {vid}  
@@ -70,25 +90,36 @@ def reporter():
 ---
 
 ## 🧠 Hook Rewrite
-> {rewritten_text.strip()}
+{rewritten_text}
+
+### ✍️ Style Notes
+{md_notes}
 
 ---
 
 ## 🪶 Title & Thumbnail Ideas
-{title_block}
+
+### 🎯 Suggested Titles
+{md_titles}
+
+### 🖼️ Thumbnail Concepts
+{md_thumbs or 'No thumbnail ideas generated.'}
 
 ---
 
 ## 🚦 Policy Check
-✅ **Safe for all audiences:** {safe_status}  
-**Flagged Terms:** {flagged_terms}
+✅ **Safe for all audiences:** {policy_safe}  
+**Flagged Terms:** {', '.join(flagged_terms) if flagged_terms else 'None'}  
+
+### 🧩 Reviewer Advice
+{md_policy_advice}
 
 ---
 
 ✅ *End of Report*
 """
 
-        # Save individual report
+        # --- Save individual report ---
         md_path = REPORTS_DIR / f"{vid}.md"
         json_path = BASE_ARTIFACTS / f"{vid}.json"
 
@@ -100,32 +131,35 @@ def reporter():
                 {
                     "video_id": vid,
                     "title": title,
-                    "hook_rewrite": rewritten_text,
-                    "title_thumb": title_block,
-                    "policy": policy_info,
+                    "hook_rewrite": {
+                        "rewritten_script": rewritten_text,
+                        "style_notes": style_notes,
+                    },
+                    "title_thumb": ideas,
+                    "policy": policy_data,
                 },
                 f,
                 indent=2,
+                ensure_ascii=False,
             )
 
         summary.append({
             "video_id": vid,
             "title": title,
-            "safe": safe_status,
+            "safe": policy_safe,
             "report_file": str(md_path)
         })
 
         print(f"✅ Report created for → {title}")
 
-    # === Save summary index ===
+    # --- Save summary index ---
     summary_path = REPORTS_DIR / "_summary.json"
     with open(summary_path, "w", encoding="utf-8") as f:
-        json.dump(summary, f, indent=2)
+        json.dump(summary, f, indent=2, ensure_ascii=False)
 
     print(f"\n💾 All reports saved → {REPORTS_DIR}")
     print("✅ Reporter complete.\n")
 
 
-# === CLI entrypoint ===
 if __name__ == "__main__":
     reporter()
