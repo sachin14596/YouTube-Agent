@@ -1,115 +1,28 @@
 [
   {
-    "video_id": "mBPURBO1kD8",
-    "title": "Reddit Inspired Upvoting System with Angular and Firebase NoSQL",
+    "video_id": "U2g1H5wPmUE",
+    "title": "Atomic Theory",
     "ideas": {
       "titles": [
-        "Building a Reddit-Style Upvoting System with Angular and Firebase NoSQL: Part 1",
-        "Firebase NoSQL Database Modeling for a Reddit-Style Upvoting System",
-        "Implementing Firebase Authentication in a Reddit-Style Upvoting System"
+        "The Atomic Hypothesis: Why It's the Key to Understanding Science",
+        "Richard Feynman's Challenge: What's the Most Important Scientific Statement?",
+        "The Building Blocks of Reality: Understanding Atoms and the Atomic Hypothesis"
       ],
       "thumbnails": [
         {
-          "concept": "Angular and Firebase development",
+          "concept": "Close-up of atomic structure with glowing particles",
           "emotion": "Curiosity",
-          "contrast": "Code snippet on a computer screen"
+          "contrast": "Bright colors against a dark background"
         },
         {
-          "concept": "Firebase NoSQL database schema",
-          "emotion": "Understanding",
-          "contrast": "Database diagram on a whiteboard"
-        },
-        {
-          "concept": "Firebase authentication setup",
-          "emotion": "Security",
-          "contrast": "Lock icon on a computer screen"
-        }
-      ]
-    },
-    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
-  },
-  {
-    "video_id": "8rAc-tJ_mJ0",
-    "title": "Firebase Database Performance Profiling",
-    "ideas": {
-      "titles": [
-        "Mastering Firebase Database Performance: A Step-by-Step Guide",
-        "Optimize Your Firebase Database with Built-in Profiling Tools",
-        "Unlock Faster Firebase Database Performance with Pro Tips"
-      ],
-      "thumbnails": [
-        {
-          "concept": "Firebase Profiler tool",
-          "emotion": "Curiosity",
-          "contrast": "Firebase logo and a clock icon"
-        },
-        {
-          "concept": "Angular application",
-          "emotion": "Excitement",
-          "contrast": "Angular logo and a gear icon"
-        },
-        {
-          "concept": "Firebase database performance metrics",
-          "emotion": "Confidence",
-          "contrast": "Firebase logo and a graph icon"
-        }
-      ]
-    },
-    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
-  },
-  {
-    "video_id": "1FOfL6bDSF4",
-    "title": "Short Imports with TypeScript Path Mapping",
-    "ideas": {
-      "titles": [
-        "Angular Productivity Boosters: Eliminate Relative Paths with TypeScript Path Mapping",
-        "Angular 5: Simplify Your Codebase with Single Global Namespace",
-        "From Relative Paths to Global Namespaces: Angular TypeScript Path Mapping Tutorial"
-      ],
-      "thumbnails": [
-        {
-          "concept": "Angular logo and TypeScript code",
+          "concept": "Visual representation of atoms attracting and repelling each other",
           "emotion": "Intrigue",
-          "contrast": "Angular icon and code snippet"
+          "contrast": "Vibrant colors and dynamic motion"
         },
         {
-          "concept": "Before-and-after code comparison",
-          "emotion": "Amazement",
-          "contrast": "Code snippets with red 'before' and green 'after' highlights"
-        },
-        {
-          "concept": "Developer working on a project with a family photo in the background",
-          "emotion": "Nostalgia",
-          "contrast": "Code editor and a photo of a loved one"
-        }
-      ]
-    },
-    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
-  },
-  {
-    "video_id": "wRWZQwiNFnM",
-    "title": "AngularFire2 Storage -  File Upload Dropzone",
-    "ideas": {
-      "titles": [
-        "Mastering AngularFire2 Storage: File Upload and Dropzone",
-        "AngularFire2 Storage: Unlocking Seamless File Uploads",
-        "Building a Dropzone File Uploader with AngularFire2 Storage"
-      ],
-      "thumbnails": [
-        {
-          "concept": "Angular Fire 2 logo with a file icon",
-          "emotion": "Excitement and curiosity",
-          "contrast": "Bright colors and a bold font"
-        },
-        {
-          "concept": "A screenshot of the file upload process",
-          "emotion": "Confidence and understanding",
-          "contrast": "A clear visual representation of the upload progress"
-        },
-        {
-          "concept": "A dropzone file uploader interface",
-          "emotion": "Familiarity and anticipation",
-          "contrast": "A clean and minimalistic design"
+          "concept": "Image of the opera house, harbor bridge, and other everyday objects with atoms visualized",
+          "emotion": "Awe",
+          "contrast": "Simple objects with complex, glowing atomic structures"
         }
       ]
     },

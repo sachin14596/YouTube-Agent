@@ -20,9 +20,9 @@ MODEL_ID = os.getenv("BEDROCK_MODEL_ID", "meta.llama3-8b-instruct-v1:0")
 # === Client ===
 try:
     bedrock_client = boto3.client("bedrock-runtime", region_name=REGION)
-    print(f"✅ Bedrock client initialized ({MODEL_ID}) in {REGION}")
+    print(f"Bedrock client initialized ({MODEL_ID}) in {REGION}")
 except Exception as e:
-    print(f"❌ Failed to init Bedrock client: {e}")
+    print(f"Failed to init Bedrock client: {e}")
     bedrock_client = None
 
 
@@ -55,8 +55,8 @@ def generate_bedrock_response(prompt: str, max_tokens: int = 500, temperature: f
         result = json.loads(response["body"].read())
         return result.get("generation", "").strip()
     except ClientError as e:
-        print(f"⚠️ AWS ClientError: {e}")
+        print(f"AWS ClientError: {e}")
         return ""
     except Exception as e:
-        print(f"⚠️ Bedrock inference error: {e}")
+        print(f"Bedrock inference error: {e}")
         return ""

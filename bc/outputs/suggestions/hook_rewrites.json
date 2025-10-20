@@ -1,41 +1,11 @@
 [
   {
-    "video_id": "mBPURBO1kD8",
-    "title": "Reddit Inspired Upvoting System with Angular and Firebase NoSQL",
-    "rewritten_script": "Did you know that Reddit's upvoting system is a crucial part of its success, with millions of users engaging with each other every day? In this episode, we're going to build a similar system using Angular and Firebase NoSQL, so you can create your own community-driven platform. We'll start by modeling our data in Firebase, answering two fundamental questions: what's a user's vote for a given item, and what's the total vote count for that item? Let's dive in and find out how we can achieve this.",
+    "video_id": "U2g1H5wPmUE",
+    "title": "Atomic Theory",
+    "rewritten_script": "Imagine a world where all scientific knowledge has been wiped out, except for one sentence. Which single statement would contain the most crucial information for future generations to rebuild their understanding of the universe? Richard Feynman, a renowned physicist, posed this thought experiment to find the answer. And surprisingly, his conclusion was that the atomic hypothesis holds the key to unlocking the secrets of science. But what is the atomic hypothesis, and why is it so fundamental to understanding our world? Let's dive in and find out.",
     "style_notes": [
-      "Start with a surprising fact to grab the audience's attention",
-      "Keep the language conversational and natural"
-    ],
-    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
-  },
-  {
-    "video_id": "8rAc-tJ_mJ0",
-    "title": "Firebase Database Performance Profiling",
-    "rewritten_script": "Did you know that a slow database can ruin the user experience of your app? In this video, we're going to explore the Firebase Profiler tool, which can help you identify bottlenecks and optimize your database performance. Whether you're building an Angular app or using the Firebase JavaScript SDK, this tutorial will show you how to use the built-in profiler to track memory and speed performance. So, let's dive in and see how to get started with Firebase Profiling!",
-    "style_notes": [
-      "Start with a bold statement to grab attention",
-      "Use conversational tone and keep it concise"
-    ],
-    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
-  },
-  {
-    "video_id": "1FOfL6bDSF4",
-    "title": "Short Imports with TypeScript Path Mapping",
-    "rewritten_script": "Imagine losing a loved one without warning. It's a harsh reminder to cherish every moment with family. That's why I'm dedicating this video to my father, who unexpectedly passed away on New Year's Day at 57. Despite his passing, I want to share something that will make your life easier and more productive. Are you tired of dealing with long, confusing relative paths in your Angular projects? I'm about to show you a game-changer that will revolutionize your workflow. Stay tuned to learn how to eliminate those pesky paths and boost your productivity.",
-    "style_notes": [
-      "Start with a hook that grabs attention",
-      "Use a personal anecdote to add emotional connection"
-    ],
-    "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
-  },
-  {
-    "video_id": "wRWZQwiNFnM",
-    "title": "AngularFire2 Storage -  File Upload Dropzone",
-    "rewritten_script": "Here's a shocking fact: uploading files from an Angular app used to be a nightmare, but now with Firebase Storage officially supported by Angular Fire 2, it's a breeze! In this episode, I'll show you the game-changing new features in the Angular Fire 2 storage module and how to build a file upload drop zone from scratch. Want to know the best part? You'll be able to control the entire upload process, pausing, canceling, or resuming it as needed. But before we dive into the code, make sure to like, subscribe, and grab the source code from AngularFirebase.com.",
-    "style_notes": [
-      "Start with a surprising fact or question to grab attention",
-      "Use a conversational tone and avoid robotic language"
+      "Start with a hook that sparks curiosity",
+      "Use a conversational tone to engage the audience"
     ],
     "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
   }

@@ -24,3 +24,9 @@ bc/outputs/artifacts/*.json
 
 # Debug/Test scripts
 bc/tools/test_*.py
+
+# Artifacts
+*.mp3
+*.webm
+bc/outputs/*
+!bc/outputs/.gitkeep

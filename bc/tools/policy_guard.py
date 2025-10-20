@@ -9,19 +9,19 @@ import json
 import re
 from bc.tools.shared_bedrock import generate_bedrock_response
 
-
 # === PATHS ===
 BASE_DIR = Path(__file__).resolve().parent.parent
 SUGGESTIONS = BASE_DIR / "outputs" / "suggestions"
 SUGGESTIONS.mkdir(parents=True, exist_ok=True)
 
-# --- Clean previous outputs (fresh run) ---
-for file in SUGGESTIONS.glob("*"):
+# --- Clean only old policy output (not entire folder) ---
+old_policy = SUGGESTIONS / "policy_notes.json"
+if old_policy.exists():
     try:
-        file.unlink()
-    except Exception:
-        pass
-
+        old_policy.unlink()
+        print("🧹 Cleaned old policy_notes.json")
+    except Exception as e:
+        print(f"⚠️ Could not remove old policy file: {e}")
 
 # === BASIC RISKY WORD LIST ===
 RISKY_WORDS = [
@@ -29,14 +29,12 @@ RISKY_WORDS = [
     "terror", "sex", "nude", "gambling", "death", "kill", "gun"
 ]
 
-
 # --- Helper: cleanup ---
 def clean_text(txt: str) -> str:
     txt = txt.replace("```json", "").replace("```", "")
     txt = re.sub(r"<[^>]+>", "", txt)
     txt = re.sub(r"\s+", " ", txt)
     return txt.strip()
-
 
 # === POLICY CHECK LOGIC ===
 def policy_guard():
@@ -59,7 +57,7 @@ def policy_guard():
         flagged = [w for w in RISKY_WORDS if w.lower() in text.lower()]
         safe = len(flagged) == 0
 
-        # --- Step 2: If flagged, rewrite safely ---
+        # --- Step 2: Rewrite if flagged ---
         advice = []
         safe_text = text
 

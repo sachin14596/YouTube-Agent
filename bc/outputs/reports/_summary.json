@@ -1,26 +1,8 @@
 [
   {
-    "video_id": "mBPURBO1kD8",
-    "title": "Reddit Inspired Upvoting System with Angular and Firebase NoSQL",
+    "video_id": "U2g1H5wPmUE",
+    "title": "Atomic Theory",
     "safe": true,
-    "report_file": "bc\\outputs\\reports\\mBPURBO1kD8.md"
-  },
-  {
-    "video_id": "8rAc-tJ_mJ0",
-    "title": "Firebase Database Performance Profiling",
-    "safe": true,
-    "report_file": "bc\\outputs\\reports\\8rAc-tJ_mJ0.md"
-  },
-  {
-    "video_id": "1FOfL6bDSF4",
-    "title": "Short Imports with TypeScript Path Mapping",
-    "safe": true,
-    "report_file": "bc\\outputs\\reports\\1FOfL6bDSF4.md"
-  },
-  {
-    "video_id": "wRWZQwiNFnM",
-    "title": "AngularFire2 Storage -  File Upload Dropzone",
-    "safe": true,
-    "report_file": "bc\\outputs\\reports\\wRWZQwiNFnM.md"
+    "report_file": "bc\\outputs\\reports\\U2g1H5wPmUE.md"
   }
 ]

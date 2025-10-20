@@ -16,12 +16,14 @@ ARTIFACTS = BASE_DIR / "outputs" / "artifacts"
 SUGGESTIONS = BASE_DIR / "outputs" / "suggestions"
 SUGGESTIONS.mkdir(parents=True, exist_ok=True)
 
-# --- Clean previous outputs (fresh run) ---
-for file in SUGGESTIONS.glob("*"):
+# --- Clean only previous output for this tool (not full folder) ---
+out_file = SUGGESTIONS / "titlethumb.json"
+if out_file.exists():
     try:
-        file.unlink()
-    except Exception:
-        pass
+        out_file.unlink()
+        print("🧹 Cleaned old titlethumb.json")
+    except Exception as e:
+        print(f"⚠️ Could not remove old titlethumb.json: {e}")
 
 
 # --- Helper: cleanup ---
@@ -110,7 +112,6 @@ Ensure valid JSON — no explanations or markdown.
         print(f"✅ Generated ideas for: {title}")
 
     # ---------- Save Output ----------
-    out_file = SUGGESTIONS / "titlethumb.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
