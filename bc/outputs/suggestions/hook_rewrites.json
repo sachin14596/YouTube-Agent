@@ -1,11 +1,11 @@
 [
   {
-    "video_id": "U2g1H5wPmUE",
-    "title": "Atomic Theory",
-    "rewritten_script": "Imagine a world where all scientific knowledge has been wiped out, except for one sentence. Which single statement would contain the most crucial information for future generations to rebuild their understanding of the universe? Richard Feynman, a renowned physicist, posed this thought experiment to find the answer. And surprisingly, his conclusion was that the atomic hypothesis holds the key to unlocking the secrets of science. But what is the atomic hypothesis, and why is it so fundamental to understanding our world? Let's dive in and find out.",
+    "video_id": "u7B7xWlsQTI",
+    "title": "Hans im Glück",
+    "rewritten_script": "Imagine if the most popular kid in school, with thousands of friends and a perfect social media image, was secretly miserable. That's the story of Hans, who's got it all on the surface, but struggles with self-doubt and insecurity. But here's the twist: Hans is a real person, and his journey is a reminder that even the most seemingly perfect lives can be hiding a deeper truth.",
     "style_notes": [
-      "Start with a hook that sparks curiosity",
-      "Use a conversational tone to engage the audience"
+      "Start with a surprising and relatable fact to grab the audience's attention",
+      "Use a conversational tone to make the script feel more engaging and personal"
     ],
     "model": "AWS Bedrock – meta.llama3-8b-instruct-v1:0"
   }

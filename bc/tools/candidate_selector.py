@@ -13,6 +13,7 @@ def _youtube():
         raise RuntimeError("YOUTUBE_API_KEY missing in .env")
     return build("youtube", "v3", developerKey=API_KEY)
 
+
 def _channel_uploads_playlist_id(channel_id: str) -> str:
     yt = _youtube()
     r = yt.channels().list(part="contentDetails", id=channel_id).execute()
@@ -20,6 +21,7 @@ def _channel_uploads_playlist_id(channel_id: str) -> str:
     if not items:
         raise ValueError("Channel not found or contentDetails unavailable")
     return items[0]["contentDetails"]["relatedPlaylists"]["uploads"]
+
 
 def _list_all_uploads(playlist_id: str, max_pages: int = 200):
     yt = _youtube()
@@ -45,28 +47,41 @@ def _list_all_uploads(playlist_id: str, max_pages: int = 200):
             break
     return out
 
+
 def _iso_to_date(s: str) -> dt.date:
     try:
         return dt.datetime.fromisoformat(s.replace("Z", "+00:00")).date()
     except Exception:
         return dt.datetime.strptime(s[:10], "%Y-%m-%d").date()
 
+
 def _chunk(ids, n=50):
     for i in range(0, len(ids), n):
         yield ids[i:i+n]
 
+
 def _attach_stats(videos):
+    """
+    Fetches viewCount, commentCount, and description for each video.
+    """
     yt = _youtube()
     id_to_video = {v["video_id"]: v for v in videos}
+
     for chunk in _chunk(list(id_to_video.keys()), 50):
-        r = yt.videos().list(part="statistics", id=",".join(chunk)).execute()
+        # ✅ Pull both statistics and snippet parts
+        r = yt.videos().list(part="statistics,snippet", id=",".join(chunk)).execute()
         for it in r.get("items", []):
             v = id_to_video.get(it["id"])
             stats = it.get("statistics", {})
+            snippet = it.get("snippet", {})
+
             if v is not None:
                 v["viewCount"] = int(stats.get("viewCount", 0))
                 v["commentCount"] = int(stats.get("commentCount", 0))
+                v["description"] = snippet.get("description", "").strip()  # ✅ Added field
+
     return list(id_to_video.values())
+
 
 # ---------- public API ----------
 
