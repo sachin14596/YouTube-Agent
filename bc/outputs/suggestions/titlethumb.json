@@ -1,28 +1,28 @@
 [
   {
-    "video_id": "U2g1H5wPmUE",
-    "title": "Atomic Theory",
+    "video_id": "u7B7xWlsQTI",
+    "title": "Hans im Glück",
     "ideas": {
       "titles": [
-        "The Atomic Hypothesis: Why It's the Key to Understanding Science",
-        "Richard Feynman's Challenge: What's the Most Important Scientific Statement?",
-        "The Building Blocks of Reality: Understanding Atoms and the Atomic Hypothesis"
+        "The Power of Social Media: A Surprising Reality Check",
+        "The Unhappy Truth About Being a Social Media Influencer",
+        "The Complexities of Human Nature: A Story of Success and Unhappiness"
       ],
       "thumbnails": [
         {
-          "concept": "Close-up of atomic structure with glowing particles",
-          "emotion": "Curiosity",
-          "contrast": "Bright colors against a dark background"
+          "concept": "A split-screen image of a person taking a selfie with a sad face",
+          "emotion": "Surprise",
+          "contrast": "The contrast between the happy and sad faces"
         },
         {
-          "concept": "Visual representation of atoms attracting and repelling each other",
+          "concept": "A collage of different social media profiles with a mix of likes and dislikes",
+          "emotion": "Confusion",
+          "contrast": "The contrast between the positive and negative reactions"
+        },
+        {
+          "concept": "A close-up image of a person's face with a mix of emotions",
           "emotion": "Intrigue",
-          "contrast": "Vibrant colors and dynamic motion"
-        },
-        {
-          "concept": "Image of the opera house, harbor bridge, and other everyday objects with atoms visualized",
-          "emotion": "Awe",
-          "contrast": "Simple objects with complex, glowing atomic structures"
+          "contrast": "The contrast between the different emotions on the person's face"
         }
       ]
     },
